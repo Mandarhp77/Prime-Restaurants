@@ -1,0 +1,46 @@
+{% extends 'nav.html' %}
+{% load static %}
+
+{% block body %}
+  <br />
+  <div class="container">
+    <form action="/get_data" method="post">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col">
+          <label for="title" class="form-label">Dish Name</label>
+          <input type="text" class="form-control" id="dname" name="dname" />
+        </div>
+        <div class="col">
+          <label for="title" class="form-label">For future purpose</label>
+          <input type="text" class="form-control" id="location" name="location" disabled />
+        </div>
+      </div>
+      <br />
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <br />
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Restaurant Name</th>
+          <th scope="col">Rate</th>
+          <th scope="col">Cuisine</th>
+          <th scope="col">Address</th>
+        </tr>
+      </thead>
+      {% for i in result%}
+        <tbody>
+          <tr>
+            <td>{{ i.name }}</td>
+            <td>{{ i.rate }}</td>
+            <td>{{ i.cuisine }}</td>
+            <td>{{ i.address }}</td>
+          </tr>
+        </tbody>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}
